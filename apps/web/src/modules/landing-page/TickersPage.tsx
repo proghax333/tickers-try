@@ -6,7 +6,7 @@ import { useTheme } from "@/modules/theme/ThemeContext";
 import { Progress } from "@/ui/Progress";
 import { TelegramLogo } from "@/ui/icons/TelegramLogo";
 import { Toggle } from "@/ui/Toggle";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { useGetTickersQuery } from "@/state/queries/tickers";
 import { useTimer } from "react-timer-hook";
 
