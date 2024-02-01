@@ -11,8 +11,5 @@
   ],
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react-circular-progressbar": "^2.1.0"
-  }
+  "license": "ISC"
 }
