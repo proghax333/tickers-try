@@ -7,6 +7,7 @@ import { Context } from "./common/context";
 import { TickersService } from "./tickers/tickers.service";
 import { TickersController } from "./tickers/tickers.controller";
 import { TickersRouter } from "./tickers/tickers.router";
+import cors from "cors";
 
 import createHttpError from "http-errors";
 import axios from "axios";
@@ -27,6 +28,13 @@ export async function createApp() {
     fetcher: axios,
   };
 
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        callback(null, origin);
+      },
+    })
+  );
   app.use(express());
   app.use(express.urlencoded({ extended: true }));
   app.use(logger());
