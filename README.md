@@ -6,3 +6,9 @@ Building a full-stack product.
 | :-------------------- | :-----------------------: |
 | [api](apps/api/)      |      REST API             |
 | [web](apps/web/)      |     Web UI                |
+
+
+## Deployments
+
+- API: https://api.tickers.atmanand.cloud
+- Web UI: https://tickers.atmanand.cloud
