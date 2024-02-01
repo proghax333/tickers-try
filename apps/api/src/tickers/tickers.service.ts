@@ -3,7 +3,7 @@ import { Context } from "../common/context";
 import { TickerItem } from "@prisma/client";
 
 export const MAX_TICKER_LIMIT = 10;
-export const TICKER_REFRESH_INTERVAL = 1000 * 10;
+export const TICKER_REFRESH_INTERVAL = 1000 * 60;
 
 export class TickersService {
   private intervalHandle: NodeJS.Timeout | null;
@@ -50,14 +50,12 @@ export class TickersService {
   private async updateTickersEntries(tickersEntries: Omit<TickerItem, "id">[]) {
     const { db } = this.context;
 
-    const result = await db.$transaction([
+    await db.$transaction([
       db.tickerItem.deleteMany(),
       db.tickerItem.createMany({
         data: tickersEntries,
       }),
     ]);
-
-    return result;
   }
 
   private async fetchTickersFromApi(maxTickerLimit = MAX_TICKER_LIMIT) {
