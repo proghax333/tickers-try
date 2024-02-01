@@ -2,14 +2,12 @@ import hodlinfo from "@/assets/hodlinfo.png";
 import { Button } from "@/ui/Button";
 import { Option } from "@/ui/Option";
 import { Select } from "@/ui/Select";
-import { useTheme } from "../theme/ThemeContext";
+import { useTheme } from "@/modules/theme/ThemeContext";
 import { Progress } from "@/ui/Progress";
 import { TelegramLogo } from "@/ui/icons/TelegramLogo";
 import { Toggle } from "@/ui/Toggle";
 import React, { ChangeEvent } from "react";
 import { useGetTickersQuery } from "@/state/queries/tickers";
-
-export type TickersPageProps = {};
 
 function formatNumber(numOrStr: number | string) {
   let number: number;
@@ -26,6 +24,8 @@ function formatNumber(numOrStr: number | string) {
     currency: "INR",
   });
 }
+
+export type TickersPageProps = {};
 
 export const TickersPage = ({}: TickersPageProps): JSX.Element => {
   const { theme, setTheme } = useTheme();
@@ -104,13 +104,13 @@ export const TickersPage = ({}: TickersPageProps): JSX.Element => {
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm">7.81 %</p>
-            <p className="text-xs text-slate-500">1 Day</p>
+            <p className="text-secondary text-sm md:text-4xl">7.81 %</p>
+            <p className="text-xs text-slate-500 md:text-lg">1 Day</p>
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm">14.47 %</p>
-            <p className="text-xs text-slate-500">7 Days</p>
+            <p className="text-secondary text-sm md:text-4xl">14.47 %</p>
+            <p className="text-xs text-slate-500 md:text-lg">7 Days</p>
           </div>
         </div>
       </div>
