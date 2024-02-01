@@ -107,12 +107,16 @@ export const TickersPage = (): JSX.Element => {
       <div className="py-2 flex flex-col w-full items-center">
         <div className="flex flex-row gap-4 w-full items-center justify-around max-w-[90%]">
           <div className="flex flex-col items-center">
-            <p className="text-red-500 text-sm md:text-4xl">0 %</p>
+            <p className="text-red-500 text-sm md:text-4xl whitespace-nowrap">
+              0 %
+            </p>
             <p className="text-slate-500 text-xs md:text-lg">5 Mins</p>
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm md:text-4xl">0.35 %</p>
+            <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
+              0.35 %
+            </p>
             <p className="text-xs text-slate-500 md:text-lg">1 Hour</p>
           </div>
 
@@ -120,21 +124,25 @@ export const TickersPage = (): JSX.Element => {
             <p className="text-slate-400 dark:text-slate-500 text-sm md:text-2xl">
               Best Price to Trade
             </p>
-            <p className="text-black dark:text-white text-xl md:text-7xl lg:text-8xl">
+            <p className="text-black dark:text-white text-xl md:text-7xl lg:text-8xl whitespace-nowrap">
               ₹ 38,10,773
             </p>
-            <p className="text-[10px] text-gray-600 font-extrabold pt-2 md:text-sm md:font-bold">
+            <p className="text-[10px] text-gray-600 font-extrabold pt-2 md:text-sm md:font-bold text-center">
               Average BTC/INR set price including commission
             </p>
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm md:text-4xl">7.81 %</p>
+            <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
+              7.81 %
+            </p>
             <p className="text-xs text-slate-500 md:text-lg">1 Day</p>
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm md:text-4xl">14.47 %</p>
+            <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
+              14.47 %
+            </p>
             <p className="text-xs text-slate-500 md:text-lg">7 Days</p>
           </div>
         </div>
