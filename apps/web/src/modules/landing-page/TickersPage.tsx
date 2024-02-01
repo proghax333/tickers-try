@@ -110,14 +110,18 @@ export const TickersPage = (): JSX.Element => {
             <p className="text-red-500 text-sm md:text-4xl whitespace-nowrap">
               0 %
             </p>
-            <p className="text-slate-500 text-xs md:text-lg">5 Mins</p>
+            <p className="text-slate-500 text-xs md:text-lg whitespace-nowrap">
+              5 Mins
+            </p>
           </div>
 
           <div className="flex flex-col items-center">
             <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
               0.35 %
             </p>
-            <p className="text-xs text-slate-500 md:text-lg">1 Hour</p>
+            <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
+              1 Hour
+            </p>
           </div>
 
           <div className="flex flex-col items-center">
@@ -136,14 +140,18 @@ export const TickersPage = (): JSX.Element => {
             <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
               7.81 %
             </p>
-            <p className="text-xs text-slate-500 md:text-lg">1 Day</p>
+            <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
+              1 Day
+            </p>
           </div>
 
           <div className="flex flex-col items-center">
             <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
               14.47 %
             </p>
-            <p className="text-xs text-slate-500 md:text-lg">7 Days</p>
+            <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
+              7 Days
+            </p>
           </div>
         </div>
       </div>
