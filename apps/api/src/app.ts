@@ -69,7 +69,7 @@ export async function createApp() {
 
     if (typeof err === "object") {
       error = {
-        code: err.code || DEFAULT_SERVER_ERROR.code,
+        code: err.code || err.status || DEFAULT_SERVER_ERROR.code,
         message: err.message || DEFAULT_SERVER_ERROR.message,
         errors: err.errors,
       };
