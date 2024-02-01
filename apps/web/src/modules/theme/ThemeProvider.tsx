@@ -13,6 +13,18 @@ export const ThemeProvider = ({ children }: { children: JSX.Element }) => {
   const [state, setState] = React.useState<ThemeState>(defaultThemeState);
 
   useEffect(() => {
+    try {
+      const theme = localStorage.getItem("theme");
+
+      if (theme && ["light", "dark"].includes(theme)) {
+        setState({
+          theme: theme as any,
+        });
+      }
+    } catch (e) {}
+  }, []);
+
+  useEffect(() => {
     if (state.theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
@@ -25,6 +37,10 @@ export const ThemeProvider = ({ children }: { children: JSX.Element }) => {
       setState({
         theme,
       });
+
+      try {
+        localStorage.setItem("theme", theme);
+      } catch (e) {}
     },
     [state.theme]
   );

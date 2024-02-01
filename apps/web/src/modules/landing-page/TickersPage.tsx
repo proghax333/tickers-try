@@ -39,12 +39,11 @@ export type TickersPageProps = {};
 
 export const TickersPage = (): JSX.Element => {
   const { theme, setTheme } = useTheme();
-  const [themeToggle, setThemeToggle] = React.useState(theme === "dark");
+  const themeChecked = theme === "dark";
 
   function handleThemeChange(e: ChangeEvent<HTMLInputElement>) {
     const checked = e.target.checked;
 
-    setThemeToggle(checked);
     setTheme(checked ? "dark" : "light");
   }
 
@@ -102,7 +101,7 @@ export const TickersPage = (): JSX.Element => {
             <TelegramLogo className="w-4" />
             <span>Connect Telegram</span>
           </Button>
-          <Toggle checked={themeToggle} onChange={handleThemeChange} />
+          <Toggle checked={themeChecked} onChange={handleThemeChange} />
         </div>
       </div>
       <div className="py-2 flex flex-col w-full items-center">
