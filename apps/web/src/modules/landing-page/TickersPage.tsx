@@ -8,6 +8,7 @@ import { TelegramLogo } from "@/ui/icons/TelegramLogo";
 import { Toggle } from "@/ui/Toggle";
 import React, { ChangeEvent } from "react";
 import { useGetTickersQuery } from "@/state/queries/tickers";
+import { useTimer } from "react-timer-hook";
 
 function formatNumber(numOrStr: number | string) {
   let number: number;
@@ -25,24 +26,49 @@ function formatNumber(numOrStr: number | string) {
   });
 }
 
+export function getExpiryTime(inSeconds: number) {
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + inSeconds);
+
+  return time;
+}
+
+export const DEFAULT_COUNTDOWN_MAX = 60;
+
 export type TickersPageProps = {};
 
-export const TickersPage = ({}: TickersPageProps): JSX.Element => {
+export const TickersPage = (): JSX.Element => {
   const { theme, setTheme } = useTheme();
-
   const [themeToggle, setThemeToggle] = React.useState(theme === "dark");
 
   function handleThemeChange(e: ChangeEvent<HTMLInputElement>) {
     const checked = e.target.checked;
-    setThemeToggle(checked);
 
+    setThemeToggle(checked);
     setTheme(checked ? "dark" : "light");
   }
 
-  const { isSuccess: isSuccessGetTickers, data: tickers } =
-    useGetTickersQuery();
+  const {
+    isSuccess: isSuccessGetTickers,
+    data: tickers,
+    refetch: refetchGetTickers,
+  } = useGetTickersQuery();
 
-  console.log(tickers);
+  const timer = useTimer({
+    expiryTimestamp: getExpiryTime(DEFAULT_COUNTDOWN_MAX),
+    onExpire: onTimerExpire,
+  });
+
+  function onTimerExpire() {
+    setTimeout(() => {
+      refetchGetTickers();
+
+      timer.restart(getExpiryTime(DEFAULT_COUNTDOWN_MAX), true);
+    }, 0);
+  }
+
+  const timerProgress = (timer.totalSeconds / DEFAULT_COUNTDOWN_MAX) * 100;
+  const timerText = `${timer.totalSeconds}`;
 
   return (
     <div className="min-h-screen bg-light dark:bg-dark font-oswald text-black dark:text-white">
@@ -71,7 +97,7 @@ export const TickersPage = ({}: TickersPageProps): JSX.Element => {
           <Button>Buy BTC</Button>
         </div>
         <div className="flex flex-row gap-2 w-full items-center justify-center p-2">
-          <Progress progress={20} value={10} />
+          <Progress value={timerProgress} text={timerText} />
           <Button className="flex items-center text-sm gap-2 bg-teal-500 dark:bg-teal-500 text-white dark:text-white">
             <TelegramLogo className="w-4" />
             <span>Connect Telegram</span>
@@ -115,21 +141,21 @@ export const TickersPage = ({}: TickersPageProps): JSX.Element => {
         </div>
       </div>
 
-      <div className="p-2 md:px-8 text-2xl overflow-x-auto w-full">
-        <table className="w-full max-w-full border-separate border-spacing-0 border-spacing-y-4 min-w-fit">
-          <thead>
-            <tr className="text-gray-500 text-xs md:text-lg">
-              <th>#</th>
-              <th>Name</th>
-              <th>Last Traded Price</th>
-              <th>Buy / Sell Price</th>
-              <th>Volume</th>
-              <th>Base Unit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isSuccessGetTickers &&
-              tickers.items.map((item, index) => {
+      {isSuccessGetTickers && (
+        <div className="p-2 md:px-8 text-2xl overflow-x-auto w-full">
+          <table className="w-full max-w-full border-separate border-spacing-0 border-spacing-y-4 min-w-fit">
+            <thead>
+              <tr className="text-gray-500 text-xs md:text-lg">
+                <th>#</th>
+                <th>Name</th>
+                <th>Last Traded Price</th>
+                <th>Buy / Sell Price</th>
+                <th>Volume</th>
+                <th>Base Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tickers.items.map((item, index) => {
                 const rowNumber = index + 1;
 
                 return (
@@ -158,9 +184,10 @@ export const TickersPage = ({}: TickersPageProps): JSX.Element => {
                   </tr>
                 );
               })}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

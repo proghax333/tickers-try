@@ -1,17 +1,17 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 
 export type ProgressProps = {
-  progress: number;
   value: number;
+  text: string;
 };
 
-export function Progress({}: ProgressProps) {
+export function Progress({ value, text }: ProgressProps) {
   return (
     // <div className="w-7 h-7 border-[3px] rounded-full border-secondary flex items-center justify-center text-sm text-secondary">
     <div className="w-7 h-">
       <CircularProgressbar
-        value={50}
-        text="20"
+        value={value}
+        text={text}
         styles={{
           text: {
             fontSize: "2.5rem",
