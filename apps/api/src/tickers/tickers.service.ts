@@ -35,6 +35,7 @@ export class TickersService {
   disableRefresh() {
     if (this.intervalHandle) {
       clearInterval(this.intervalHandle);
+      this.intervalHandle = null;
     }
   }
 
