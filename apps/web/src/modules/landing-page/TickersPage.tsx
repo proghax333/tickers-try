@@ -9,6 +9,7 @@ import { Toggle } from "@/ui/Toggle";
 import { ChangeEvent } from "react";
 import { useGetTickersQuery } from "@/state/queries/tickers";
 import { useTimer } from "react-timer-hook";
+import { ColorRing } from "react-loader-spinner";
 
 function formatNumber(numOrStr: number | string) {
   let number: number;
@@ -48,6 +49,7 @@ export const TickersPage = (): JSX.Element => {
   }
 
   const {
+    isLoading: isLoadingGetTickers,
     isSuccess: isSuccessGetTickers,
     data: tickers,
     refetch: refetchGetTickers,
@@ -104,103 +106,119 @@ export const TickersPage = (): JSX.Element => {
           <Toggle checked={themeChecked} onChange={handleThemeChange} />
         </div>
       </div>
-      <div className="py-2 flex flex-col w-full items-center">
-        <div className="flex flex-row gap-4 w-full items-center justify-around max-w-[90%]">
-          <div className="flex flex-col items-center">
-            <p className="text-red-500 text-sm md:text-4xl whitespace-nowrap">
-              0 %
-            </p>
-            <p className="text-slate-500 text-xs md:text-lg whitespace-nowrap">
-              5 Mins
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
-              0.35 %
-            </p>
-            <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
-              1 Hour
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <p className="text-slate-400 dark:text-slate-500 text-sm md:text-2xl">
-              Best Price to Trade
-            </p>
-            <p className="text-black dark:text-white text-xl md:text-7xl lg:text-8xl whitespace-nowrap">
-              ₹ 38,10,773
-            </p>
-            <p className="text-[10px] text-gray-600 font-extrabold pt-2 md:text-sm md:font-bold text-center">
-              Average BTC/INR set price including commission
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
-              7.81 %
-            </p>
-            <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
-              1 Day
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
-              14.47 %
-            </p>
-            <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
-              7 Days
-            </p>
-          </div>
-        </div>
-      </div>
-
       {isSuccessGetTickers && (
-        <div className="p-2 md:px-8 text-2xl overflow-x-auto w-full">
-          <table className="w-full max-w-full border-separate border-spacing-0 border-spacing-y-4 min-w-fit">
-            <thead>
-              <tr className="text-gray-500 text-xs md:text-lg">
-                <th>#</th>
-                <th>Name</th>
-                <th>Last Traded Price</th>
-                <th>Buy / Sell Price</th>
-                <th>Volume</th>
-                <th>Base Unit</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tickers.items.map((item, index) => {
-                const rowNumber = index + 1;
+        <>
+          <div className="py-2 flex flex-col w-full items-center">
+            <div className="flex flex-row gap-4 w-full items-center justify-around max-w-[90%]">
+              <div className="flex flex-col items-center">
+                <p className="text-red-500 text-sm md:text-4xl whitespace-nowrap">
+                  0 %
+                </p>
+                <p className="text-slate-500 text-xs md:text-lg whitespace-nowrap">
+                  5 Mins
+                </p>
+              </div>
 
-                return (
-                  <tr
-                    key={`price-row-${item.id}`}
-                    className="bg-gray-200 dark:bg-[#334]"
-                  >
-                    <td className="text-center md:py-2 px-2 whitespace-nowrap">
-                      {rowNumber}
-                    </td>
-                    <td className="text-center md:py-2 px-2 whitespace-nowrap">
-                      {item.name}
-                    </td>
-                    <td className="text-center md:py-2 px-2 whitespace-nowrap">
-                      {formatNumber(item.last)}
-                    </td>
-                    <td className="text-center md:py-2 px-2 whitespace-nowrap">
-                      {formatNumber(item.buy)} / {formatNumber(item.sell)}
-                    </td>
-                    <td className="text-center md:py-2 px-2 whitespace-nowrap">
-                      {item.volume}
-                    </td>
-                    <td className="text-center md:py-2 px-2 whitespace-nowrap">
-                      {item.base_unit}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+              <div className="flex flex-col items-center">
+                <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
+                  0.35 %
+                </p>
+                <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
+                  1 Hour
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <p className="text-slate-400 dark:text-slate-500 text-sm md:text-2xl">
+                  Best Price to Trade
+                </p>
+                <p className="text-black dark:text-white text-xl md:text-7xl lg:text-8xl whitespace-nowrap">
+                  ₹ 38,10,773
+                </p>
+                <p className="text-[10px] text-gray-600 font-extrabold pt-2 md:text-sm md:font-bold text-center">
+                  Average BTC/INR set price including commission
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
+                  7.81 %
+                </p>
+                <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
+                  1 Day
+                </p>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <p className="text-secondary text-sm md:text-4xl whitespace-nowrap">
+                  14.47 %
+                </p>
+                <p className="text-xs text-slate-500 md:text-lg whitespace-nowrap">
+                  7 Days
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-2 md:px-8 text-2xl overflow-x-auto w-full">
+            <table className="w-full max-w-full border-separate border-spacing-0 border-spacing-y-4 min-w-fit">
+              <thead>
+                <tr className="text-gray-500 text-xs md:text-lg">
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Last Traded Price</th>
+                  <th>Buy / Sell Price</th>
+                  <th>Volume</th>
+                  <th>Base Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tickers.items.map((item, index) => {
+                  const rowNumber = index + 1;
+
+                  return (
+                    <tr
+                      key={`price-row-${item.id}`}
+                      className="bg-gray-200 dark:bg-[#334]"
+                    >
+                      <td className="text-center md:py-2 px-2 whitespace-nowrap">
+                        {rowNumber}
+                      </td>
+                      <td className="text-center md:py-2 px-2 whitespace-nowrap">
+                        {item.name}
+                      </td>
+                      <td className="text-center md:py-2 px-2 whitespace-nowrap">
+                        {formatNumber(item.last)}
+                      </td>
+                      <td className="text-center md:py-2 px-2 whitespace-nowrap">
+                        {formatNumber(item.buy)} / {formatNumber(item.sell)}
+                      </td>
+                      <td className="text-center md:py-2 px-2 whitespace-nowrap">
+                        {item.volume}
+                      </td>
+                      <td className="text-center md:py-2 px-2 whitespace-nowrap">
+                        {item.base_unit}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+
+      {isLoadingGetTickers && (
+        <div className="w-full flex items-center justify-center py-8">
+          <ColorRing
+            visible={true}
+            height="100"
+            width="100"
+            ariaLabel="color-ring-loading"
+            wrapperStyle={{}}
+            wrapperClass="color-ring-wrapper"
+            colors={["#5dc7c2", "#5dc7c2", "#5dc7c2", "#5dc7c2", "#5dc7c2"]}
+          />
         </div>
       )}
     </div>
