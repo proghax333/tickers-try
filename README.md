@@ -10,5 +10,5 @@ Building a full-stack product.
 
 ## Deployments
 
-- API: https://api.tickers.atmanand.cloud
+- API: https://api.tickers.atmanand.cloud/api/v1/tickers
 - Web UI: https://tickers.atmanand.cloud
