@@ -3,7 +3,7 @@ import { Context } from "../common/context";
 import { TickerItem } from "@prisma/client";
 
 export const MAX_TICKER_LIMIT = 10;
-export const TICKER_REFRESH_INTERVAL = 1000 * 60;
+export const TICKER_REFRESH_INTERVAL = 1000 * 30;
 
 export class TickersService {
   private intervalHandle: NodeJS.Timeout | null;
